@@ -1,6 +1,8 @@
 # mina-cakephp
 
-Tools to deploy CakePHP application with Mina
+!Under development!
+
+Tools to deploy CakePHP application using Mina(http://nadarei.co/mina/)
 
 ## Contributing to mina-cakephp
  

@@ -1,4 +1,5 @@
 require 'mina-cakephp/cakephp/tmp'
+require 'mina-cakephp/cakephp/git'
 
 namespace :cakephp do  
   desc "Configure CakePHP Core include_path in webroot/index.php file."
@@ -7,7 +8,7 @@ namespace :cakephp do
 
     queue %{
       echo "-----> Setting up CakePHP path." && (
-        #{echo_cmd %{sed -ri "/#{regex}/ c define('CAKE_CORE_INCLUDE_PATH', '#{cake_core_path}');" webroot/index.php }} &&
+        #{echo_cmd %{sed -ri "/#{regex}/ c define('CAKE_CORE_INCLUDE_PATH', '#{cake_path}/lib');"  webroot/index.php }} &&
         echo "------> Done."
       ) || (
         echo "! ERROR: Setup CakePHP path failed."
@@ -61,7 +62,7 @@ namespace :cakephp do
     )
   }
   end
-
+end
 # Adaptive tasks to setup CakePHP Application.
 task :setup do
   invoke :'cakephp:tmp:create'

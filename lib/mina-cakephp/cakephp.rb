@@ -1,6 +1,6 @@
 require 'mina-cakephp/cakephp/tmp'
 require 'mina-cakephp/cakephp/git'
-require 'mina-cakephp/cakephp/schema'
+require 'mina-cakephp/cakephp/migrations'
 
 namespace :cakephp do  
   desc "Configure CakePHP Core include_path in webroot/index.php file."

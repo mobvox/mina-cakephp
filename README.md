@@ -2,11 +2,11 @@
 
 mina-cakephp add supports to deploy CakePHP Applications using [Mina](http://nadarei.co/mina).
 
-*The project still in development. Not recommended for use in production.
+The project still in development. Not recommended for use in production.
 
 ## How to use
 
-Create one file at root directory of app named Minafile, here is the sample file documented
+Create one file at root directory of app named Minafile. Sample:
 
 	require 'mina/git'
 	require 'mina-cakephp'

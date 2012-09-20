@@ -4,7 +4,7 @@ namespace :cakephp do
     set :cake_revision, 'master'
     set :cake_repository, 'git://github.com/cakephp/cakephp.git'
 
-    desc "Clone CakePHP Core."
+    desc "Clone CakePHP Core into cake_path."
     task :clone do
       queue %{
           echo "-----> Cloning CakePHP Core."

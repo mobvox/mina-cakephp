@@ -1,24 +1,45 @@
 # mina-cakephp
 
-mina-cakephp add supports to deploy CakePHP Applications using [Mina](http://nadarei.co/mina).
+mina-cakephp is a gem that adds many tasks to aid in the deployment of [CakePHP] (http://www.cakephp.org) applications
+using Mina. [Mina] (http://nadarei.co/mina)
 
-## How to use
+# Getting Start
 
-Create one file at root directory of app named Minafile. Sample:
+## Instalation
+	
+	gem install mina-cakephp
+
+## Configuration
+
+After installation, create a file in the root directory of your project called `Minafile`.
+
+Note: Mina uses the command `mina init` to create a config file at `config/deploy.rb`, but CakePHP use the `Config` directory to hold configurations.
+To avoid problems we recommend using `Minafile` instead of `config/deploy.rb`
+
+Minafile sample:
 
 	require 'mina/git'
+	# Load tasks of mina-cakephp
 	require 'mina-cakephp'
 
+	# Mina default configuration
+	# more info at http://nadarei.co/mina
 	set :domain, 'server.to.deploy.com' 
 	set :deploy_to, '/var/www/my-app'
 	set :repository, 'git@mysever:my-app.git'
 	set :user, 'root'
 
-	set :shared_paths, ['Config/database.php', 'tmp'] #CakePHP shared paths used at apps.
+	# Shared file or folder between deploys
+	# more at http://nadarei.co/mina/tasks/deploy_link_shared_paths.html
+	set :shared_paths, ['Config/database.php', 'tmp']
 
-	#CakePHP Config
-	set :cake_path, '/var/www/libs/cakephp' #CakePHP core path
-	set :cake_database, { #Connection configuration
+	## mina-cakephp Settings
+	# Defines the  CakePHP core path. 
+	# This path is used to execute bake commands and update webroot/index.php if needed.
+	set :cake_path, '/var/www/libs/cakephp'
+	# Database connection settings.
+	# This will be used to create Config/database.php
+	set :cake_database, {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
@@ -28,44 +49,62 @@ Create one file at root directory of app named Minafile. Sample:
 		'prefix' => ''
 	}
 
-	#Steps to deploy app
-
+	## Deploy Task
 	task :deploy do
 	  deploy do
-	    invoke :'git:clone' #Clone project from :respository
-	    invoke :'deploy:link_shared_paths' #Create symlinks of :shared_paths
+	  	# Clone project, more at http://nadarei.co/mina/tasks/git_clone.html
+	    invoke :'git:clone'
+	    # Create symlinks
+	    # more at http://nadarei.co/mina/tasks/deploy_link_shared_paths.html
+	    invoke :'deploy:link_shared_paths'
 	    
-	    invoke :'cakephp:cake_core_path' #Set CakePHP Core path at webroot/index.php
-	    invoke :'cakephp:debug_zero' #Set debug 0 at Config/core.php
-	    invoke :'cakephp:tmp:clean_cache' #Clear tmp files
+	    # If you do not have CakePHP in your include_path, you will need to set CakePHP core path at webroot/index.php.
+	    # This task will do it for you.
+	    invoke :'cakephp:cake_core_path'
+	    # This task changes the debug level to 0 at Config/core.php
+	    invoke :'cakephp:debug_zero'
+	    # This task will delete all temporary files at tmp/
+	    invoke :'cakephp:tmp:clean_cache'
 
-	    invoke :'cakephp:asset_compress:setup' #Create folder to receive assets
-	    invoke :'cakephp:asset_compress:build' #Run Schema build command line
+	    # This task will create a folder and set correct permissions 
+	    # to receive build files of AssetCompress plugin (https://github.com/markstory/asset_compress)
+	    invoke :'cakephp:asset_compress:setup'
+	    # Build asset files
+	    invoke :'cakephp:asset_compress:build'
 
 	    to :launch do
-	      invoke :'cakephp:migrations:run_all' #Run migrations before launch app
+	    	# If you are using the Migrations plugin of CakeDC
+	    	# you need to invoke this task to run all migrations before launching the application.
+	    	invoke :'cakephp:migrations:run_all'
 	    end
 	  end
 	end
 
-	desc "Custom setup commands"
+	# Taks to prepare the environment
 	task :setup do
-	    #Clone CakePHP Core into cake_path, you can omit this if you dont need to clone cakephp when 
-	    #run mina setup
-	    #invoke :'cakephp:git:clone'
+	    # Invoke this task if you need to clone CakePHP core when setting up the enviroment.
+	    invoke :'cakephp:git:clone'
 	end
 
-Then run:
-	
+## Setup Environment
+
 	mina setup
 
-It will prepare server to receive first deploy.
+More at http://nadarei.co/mina/directory_structure.html
 
-To deploy your app just run:
+## Deploying
 
 	mina deploy
 
-Done.
+More at http://nadarei.co/mina/deploying.html
+
+## More tasks
+
+Run
+
+	mina -T
+
+To list all tasks.
 
 ## Contributing to mina-cakephp
  

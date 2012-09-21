@@ -1,7 +1,7 @@
 # mina-cakephp
 
 mina-cakephp is a gem that adds many tasks to aid in the deployment of [CakePHP] (http://www.cakephp.org) applications
-using Mina. [Mina] (http://nadarei.co/mina)
+using [Mina] (http://nadarei.co/mina).
 
 # Getting Start
 
@@ -16,7 +16,7 @@ After installation, create a file in the root directory of your project called `
 Note: Mina uses the command `mina init` to create a config file at `config/deploy.rb`, but CakePHP use the `Config` directory to hold configurations.
 To avoid problems we recommend using `Minafile` instead of `config/deploy.rb`
 
-Minafile sample:
+`Minafile` sample:
 
 	require 'mina/git'
 	# Load tasks of mina-cakephp

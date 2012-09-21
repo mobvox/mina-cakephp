@@ -2,8 +2,6 @@
 
 mina-cakephp add supports to deploy CakePHP Applications using [Mina](http://nadarei.co/mina).
 
-The project still in development. Not recommended for use in production.
-
 ## How to use
 
 Create one file at root directory of app named Minafile. Sample:
@@ -41,6 +39,9 @@ Create one file at root directory of app named Minafile. Sample:
 	    invoke :'cakephp:debug_zero' #Set debug 0 at Config/core.php
 	    invoke :'cakephp:tmp:clean_cache' #Clear tmp files
 
+	    invoke :'cakephp:asset_compress:setup' #Create folder to receive assets
+	    invoke :'cakephp:asset_compress:build' #Run Schema build command line
+
 	    to :launch do
 	      invoke :'cakephp:migrations:run_all' #Run migrations before launch app
 	    end
@@ -54,11 +55,11 @@ Create one file at root directory of app named Minafile. Sample:
 	    #invoke :'cakephp:git:clone'
 	end
 
-Then run at:
+Then run:
 	
 	mina setup
 
-Will prepare server to receive first deploy.
+It will prepare server to receive first deploy.
 
 To deploy your app just run:
 
@@ -78,5 +79,5 @@ Done.
 
 ## Copyright
 
-Copyright (c) 2012 Daniel Pakuschewski. See LICENSE.txt for
-further details.
+Copyright (c) 2012 MobVox Soluções Digitais http://www.mobvox.com.br
+See LICENSE for further details.

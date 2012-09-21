@@ -3,7 +3,17 @@ namespace :cakephp do
   namespace :asset_compress do
     extend MinaCakePHP
 
-    set :asset_path, 'assets' 
+    set :asset_path, 'assets'
+
+    desc "Create asset directory based on asset_path config."
+    task :setup do
+      queue %{
+          echo "-----> Setup assets directory."
+          #{echo_cmd %{mkdir -p webroot/#{asset_path}}} &&
+          #{echo_cmd %{chmod -R 755 webroot/#{asset_path}}} &&
+          echo "-----> Done."
+        }
+    end
 
     desc "Clears all builds defined in the ini file."
     task :clear do
@@ -25,5 +35,4 @@ namespace :cakephp do
       cake_cmd "AssetCompress.AssetCompress build_dynamic"
     end
   end
-
 end

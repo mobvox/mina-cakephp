@@ -27,7 +27,7 @@ namespace :cakephp do
           echo "-----> Cleaning CakePHP cache directories"
           #{cmds.flatten.join("\n")}
           echo "-----> Done."
-        }  
+        }
     end
   end
 end

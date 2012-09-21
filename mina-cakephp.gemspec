@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.version     = File.read('VERSION')
   s.authors     = ["Daniel Pakuschewski"]
   s.email       = ["contato@danielpk.com.br"]
-  s.homepage    = "http://github.com/danielpk/mina-cakephp"
-  s.summary     = "CakePHP support for Mina"
-  s.description = "Useful tools to use Mina to deploy CakePHP apps."
+  s.homepage    = "http://github.com/mobvox/mina-cakephp"
+  s.summary     = "Tools to deploy CakePHP apps with mina."
+  s.description = "Tools to deploy CakePHP apps with mina."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

@@ -1,5 +1,4 @@
 require 'mina-cakephp/helpers'
-
 namespace :cakephp do
   namespace :migrations do
     extend MinaCakePHP

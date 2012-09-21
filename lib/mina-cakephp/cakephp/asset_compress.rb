@@ -3,7 +3,7 @@ namespace :cakephp do
   namespace :asset_compress do
     extend MinaCakePHP
 
-    set :asset_path, 'assets'
+    set :asset_path, 'assets' 
 
     desc "Clears all builds defined in the ini file."
     task :clear do

@@ -20,7 +20,7 @@ namespace :cakephp do
   end
 
   desc "Configure CakePHP debug to 0."
-  task :debug_zero do
+  task :debug_disable do
     regex = "((\\/\\/)?\\s*Configure::write\\('debug',(.*)\\);)"
     queue %{
       echo "-----> Setting up CakePHP debug to 0" && (
@@ -56,8 +56,8 @@ namespace :cakephp do
 
   queue %{
     echo "-----> Creating CakePHP database config file." && (
-      #{echo_cmd %{mkdir -p #{shared_path}/Config}} &&
-      #{echo_cmd %{echo "#{content}" > #{shared_path}/Config/database.php}} &&
+      #{echo_cmd %{mkdir -p #{deploy_to}/#{shared_path}/Config}} &&
+      #{echo_cmd %{echo "#{content}" > #{deploy_to}/#{shared_path}/Config/database.php}} &&
       echo "-----> Done."
     ) || (
       echo "ERROR: Problem to create database config file."

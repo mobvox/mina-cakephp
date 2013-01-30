@@ -62,7 +62,7 @@ To avoid problems we recommend using `Minafile` instead of `config/deploy.rb`
 	    # This task will do it for you.
 	    invoke :'cakephp:cake_core_path'
 	    # This task changes the debug level to 0 at Config/core.php
-	    invoke :'cakephp:debug_zero'
+	    invoke :'cakephp:debug_disable'
 	    # This task will delete all temporary files at tmp/
 	    invoke :'cakephp:tmp:clean_cache'
 

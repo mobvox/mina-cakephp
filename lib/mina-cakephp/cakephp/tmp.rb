@@ -6,7 +6,7 @@ namespace :cakephp do
     desc "Setup CakePHP tmp directories."
     task :create do
       cmds = cake_tmp_dirs.map do |d|
-        echo_cmd %{mkdir -p #{shared_path}/tmp/#{d}}
+        echo_cmd %{mkdir -p #{deploy_to}/#{shared_path}/tmp/#{d}}
       end
 
       queue %{
